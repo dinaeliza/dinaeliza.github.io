@@ -1,0 +1,210 @@
+<!-- KEEP BRITAIN TIDY -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQs | Keep Britain Tidy</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<a href="https://www.keepbritaintidy.org/">
+<img src="https://www.keepbritaintidy.org/themes/custom/ie_sub/img/logo.svg" alt="Keep Britain Tidy logo" color=white width=215 height=100 style = "filter: invert(1) brightness(200)">
+</a>
+
+
+<nav>
+    <a href="https://www.keepbritaintidy.org/" color=white>Home</a>
+    > 
+    <a href="https://www.keepbritaintidy.org/get-involved/volunteering" color=white>Volunteering</a> 
+    >
+    <a href="https://www.keepbritaintidy.org/our-work/eliminating-litter/litter-picking-events" color=white>Events</a>    
+    > FAQs
+</nav>
+
+
+<header class="page-header">
+    <h1>Information for volunteers</h1>
+    <p>
+    Keep Britain Tidy : Information regarding equipment and facilities provided by the councils for volunteers. 
+    </p>
+</header>
+
+
+<div class="container">
+
+<div class="selection">
+    <label for="region">Select a region :</label>
+    <br>        
+    <select name="region" id="region" onchange="selectedRegion()" style="width: 20rem;">
+        <option value="" selected="selected">-- Please choose a region --</option>
+	<option value="East Midlands, England">East Midlands</option>
+  	<option value="East of England, England">East of England</option>
+  	<option value="London, England">London</option>
+  	<option value="North East, England">North East England</option>
+  	<option value="North West, England">North West England</option>
+  	<option value="South East, England">South East England</option>
+	<option value="South West, England">South West England</option>
+  	<option value="West Midlands, England">West Midlands</option>
+  	<option value="Yorkshire and the Humber, England">Yorkshire and the Humber</option>
+	<option value="Scotland">Scotland</option>
+	<option value="Wales">Wales</option>
+	<option value="Northern Ireland">Northern Ireland</option>
+    </select>
+    <br>
+
+    <label for="council">Select your council :</label>
+    <br>        
+    <select name="council" id="council" onchange="selectedCouncil()" style="width: 20rem;">
+        <option value="" selected="selected">-- Please choose a region first --</option>
+    </select>
+    <br>
+</div>
+
+<script>
+async function loadJSON() {
+    const response = await fetch("councils_and_regions.json");
+    const council = await response.json();
+}
+//loadJSON();
+
+let selected_user_region = ""
+let selected_user_council = ""
+
+function selectedRegion(){
+    //user_region = document.forms[0].region.value;
+    user_region = region.value;
+
+    selected_user_region = user_region;
+    
+    clearCouncilList();
+    set_council_list(selected_user_region)
+}
+
+function clearCouncilList(){
+    var councilSel = document.getElementById("council");
+    while (councilSel.options.length) {
+	councilSel.remove(0);
+    }
+
+    var o = document.createElement("option");
+    if (selected_user_region == ""){        
+        o.text = "-- Please choose a region first --"
+        councilSel.options.add(o, 0);
+    }
+    else {
+        o.text = "-- Please choose a council --"
+        councilSel.options.add(o, 0);
+    }
+}
+
+function set_council_list(region_selected){
+
+    var councilSel = document.getElementById("council");
+    var council_list_for_region = [];
+
+/*  for (var x in councils_and_regions)    {
+        if (councils_and_regions.x == region_selected) { 
+	    councilSel.options[councilSel.options.length] = new Option(x,x)
+	}
+    }
+*/
+    for (let [c, r] of Object.entries(councils_and_regions)){
+	if (r == region_selected) {
+	    councilSel.options[councilSel.options.length] = new Option(c,c)
+	}
+    }
+}
+
+function selectedCouncil(){
+    user_council = council.value;
+    alert("You selected : " + user_council);
+    selected_user_council = user_council;
+}
+</script>
+
+<div class="faq">
+    <h2>FAQs</h2>
+    <p id="demo">Test</p><br>
+    <p>
+    Check the FAQs to find how the local authority is currently supporting local litter-picking volunteers and those interested in volunteering.
+    <br>
+    <br>
+    1. What is the name of your local authority, town council or parish council?
+    <br>
+    3. Do you have a webpage, social media page, or other online resources for environmental / litter-picking volunteers? If so, please provide links.
+    <br>
+    4. Which, if any, of the following equipment and support do you provide to <strong>individuals</strong> wishing to litter-pick? Please select all that apply.
+    <br>
+    Litter-pickers | Bags | Hoops | Gloves | Hi-vis vests | 
+    <br> 
+    First Aid Training | Insurance | Networking opportunities | Bag collections | Risk assessments | Litter-picking guidance |
+    <br>
+    Something else (please specify) ______ | None of the above | Don’t know
+    <br>
+    5. Which, if any, of the following equipment and support do you provide to litter-picking <strong>groups</strong>? Please select all that apply.
+    <br>
+    Litter-pickers | Bags | Hoops | Gloves | Hi-vis vests | 
+    <br> 
+    First Aid Training | Insurance | Networking opportunities | Bag collections | Risk assessments | Litter-picking guidance |
+    <br>
+    Something else (please specify) ______ | None of the above | Don’t know
+    <br>
+    6. At what time(s) of the year do you offer this equipment and support to litter-picking volunteers? Please select one.
+    <br> 
+    Year-round | Something else (please specify) ______________________ | Don’t know | N/A – we do not provide equipment or support to litter-picking volunteers
+    <br>
+    7. What should volunteers do with the bags of litter they collect? 
+    <br>
+    E.g. How do they arrange a bag collection? Do you provide designated pick-up points? Do volunteers dispose of the waste themselves? Please provide as much detail as possible, including any relevant web links or email addresses.
+    <br>
+    8. What should volunteers do with separated recycling they collect? E.g. Do you accept this? Is this the same process as for general litter? 
+    <br>
+    
+    <br>
+    Keep Britain Tidy : Information regarding equipment and facilities provided by the councils for volunteers. 
+    </p>
+</div>
+
+<div class="contact">
+    <h3>Contact:</h2>
+    <p>
+    <br>Team / staff member name: <br>
+    <br>Email address: <br>
+    <br>Phone number: <br>
+
+    <br>If volunteers should not contact local authority/council, please provide details of the relevant organisation.
+    </p>
+</div>
+
+</div>
+
+
+<footer class="page-footer">
+
+    <img class="footer-img" src="https://www.keepbritaintidy.org/themes/custom/ie_sub/img/logo.svg" alt="Keep Britain Tidy logo" color=white width=172 height=auto style = "filter: invert(1) brightness(200)">
+    <p class="footer-text">        
+    Keep Britain Tidy is a registered Charity No. 1071737.<br>
+    Registered as a Company limited by guarantee in England & Wales No. 3496361.<br>
+    Registered office at Elizabeth House, The Pier, Wigan, WN3 4EX
+    </p>
+
+</footer>
+
+
+
+<script>
+document.getElementById("demo").innerHTML = "window" + window.innerWidth + "screen" + screen.width;
+const councils_and_regions_json = '{"Council Name": "Region/Country", "Amber Valley Borough Council": "East Midlands, England", "Ashfield District Council": "East Midlands, England", "Bassetlaw District Council": "East Midlands, England", "Blaby District Council": "East Midlands, England", "Bolsover District Council": "East Midlands, England", "Boston Borough Council": "East Midlands, England", "Broxtowe Borough Council": "East Midlands, England", "Charnwood Borough Council": "East Midlands, England", "Chesterfield Borough Council": "East Midlands, England", "Derby City Council": "East Midlands, England", "Derbyshire County Council": "East Midlands, England", "Derbyshire Dales District Council": "East Midlands, England", "East Lindsey District Council": "East Midlands, England", "Erewash Borough Council": "East Midlands, England", "Gedling Borough Council": "East Midlands, England", "Harborough District Council": "East Midlands, England", "High Peak Borough Council": "East Midlands, England", "Hinckley and Bosworth Borough Council": "East Midlands, England", "Leicester City Council": "East Midlands, England", "Leicestershire County Council": "East Midlands, England", "Lincoln City Council": "East Midlands, England", "Lincolnshire County Council": "East Midlands, England", "Mansfield District Council": "East Midlands, England", "Melton Borough Council": "East Midlands, England", "Newark & Sherwood District Council": "East Midlands, England", "North East Derbyshire District Council": "East Midlands, England", "North Kesteven District Council": "East Midlands, England", "North Northamptonshire Council": "East Midlands, England", "North West Leicestershire District Council": "East Midlands, England", "Nottingham City Council": "East Midlands, England", "Nottinghamshire County Council": "East Midlands, England", "Oadby & Wigston Borough Council": "East Midlands, England", "Rushcliffe Borough Council": "East Midlands, England", "Rutland County Council": "East Midlands, England", "South Derbyshire District Council": "East Midlands, England", "South Holland District Council": "East Midlands, England", "South Kesteven District Council": "East Midlands, England", "West Lindsey District Council": "East Midlands, England", "West Northamptonshire Council": "East Midlands, England", "Babergh District Council": "East of England, England", "Basildon Borough Council": "East of England, England", "Bedford Borough Council": "East of England, England", "Braintree District Council": "East of England, England", "Breckland District Council": "East of England, England", "Brentwood Borough Council": "East of England, England", "Broadland District Council": "East of England, England", "Broxbourne Borough Council": "East of England, England", "Cambridge City Council": "East of England, England", "Cambridgeshire County Council": "East of England, England", "Castle Point District Council": "East of England, England", "Central Bedfordshire Council": "East of England, England", "Chelmsford City Council": "East of England, England", "Colchester City Council": "East of England, England", "Dacorum Borough Council": "East of England, England", "East Cambridgeshire District Council": "East of England, England", "East Hertfordshire District Council": "East of England, England", "East Suffolk Council": "East of England, England", "Epping Forest District Council": "East of England, England", "Essex County Council": "East of England, England", "Fenland District Council": "East of England, England", "Great Yarmouth Borough Council": "East of England, England", "Harlow District Council": "East of England, England", "Hertfordshire County Council": "East of England, England", "Hertsmere Borough Council": "East of England, England", "Huntingdonshire District Council": "East of England, England", "Ipswich Borough Council": "East of England, England", "Kings Lynn & West Norfolk Borough Council": "East of England, England", "Luton Borough Council": "East of England, England", "Maldon District Council": "East of England, England", "Mid Suffolk District Council": "East of England, England", "Norfolk County Council": "East of England, England", "North Hertfordshire District Council": "East of England, England", "North Norfolk District Council": "East of England, England", "Norwich City Council": "East of England, England", "Peterborough City Council": "East of England, England", "Rochford District Council": "East of England, England", "South Cambridgeshire District Council": "East of England, England", "South Norfolk District Council": "East of England, England", "Southend-on-Sea Borough Council": "East of England, England", "St Albans City Council": "East of England, England", "Stevenage Borough Council": "East of England, England", "Suffolk County Council": "East of England, England", "Tendring District Council": "East of England, England", "Three Rivers District Council": "East of England, England", "Thurrock Council": "East of England, England", "Uttlesford District Council": "East of England, England", "Watford Borough Council": "East of England, England", "Welwyn Hatfield Borough Council": "East of England, England", "West Suffolk Council": "East of England, England", "City of Westminster": "London, England", "Royal Borough of Greenwich": "London, England", "Royal Borough of Kensington and Chelsea": "London, England", "Royal Borough of Kingston upon Thames": "London, England", "The City of London Corporation": "London, England", "The London Borough of Barking and Dagenham": "London, England", "The London Borough of Barnet": "London, England", "The London Borough of Bexley": "London, England", "The London Borough of Brent": "London, England", "The London Borough of Bromley": "London, England", "The London Borough of Camden": "London, England", "The London Borough of Croydon": "London, England", "The London Borough of Ealing": "London, England", "The London Borough of Enfield": "London, England", "The London Borough of Hackney": "London, England", "The London Borough of Hammersmith and Fulham": "London, England", "The London Borough of Haringey": "London, England", "The London Borough of Harrow": "London, England", "The London Borough of Havering": "London, England", "The London Borough of Hillingdon": "London, England", "The London Borough of Hounslow": "London, England", "The London Borough of Islington": "London, England", "The London Borough of Lambeth": "London, England", "The London Borough of Lewisham": "London, England", "The London Borough of Merton": "London, England", "The London Borough of Newham": "London, England", "The London Borough of Redbridge": "London, England", "The London Borough of Richmond upon Thames": "London, England", "The London Borough of Southwark": "London, England", "The London Borough of Sutton": "London, England", "The London Borough of Tower Hamlets": "London, England", "The London Borough of Waltham Forest": "London, England", "The London Borough of Wandsworth": "London, England", "Darlington Borough Council": "North East, England", "Durham County Council": "North East, England", "Gateshead Borough Council": "North East, England", "Hartlepool Borough Council": "North East, England", "Middlesbrough Borough Council": "North East, England", "Newcastle Upon Tyne City Council": "North East, England", "North Tyneside Borough Council": "North East, England", "Northumberland County Council": "North East, England", "Redcar and Cleveland Borough Council": "North East, England", "South Tyneside Borough Council": "North East, England", "Stockton-on-Tees Borough Council": "North East, England", "Sunderland City Council": "North East, England", "Blackburn with Darwen Borough Council": "North West, England", "Blackpool Council": "North West, England", "Bolton Borough Council": "North West, England", "Burnley Borough Council": "North West, England", "Bury Borough Council": "North West, England", "Cheshire East Council": "North West, England", "Cheshire West and Chester Council": "North West, England", "Chorley Borough Council": "North West, England", "Cumberland Council": "North West, England", "Fylde Borough Council": "North West, England", "Halton Borough Council": "North West, England", "Hyndburn Borough Council": "North West, England", "Knowsley Borough Council": "North West, England", "Lancashire County Council": "North West, England", "Lancaster City Council": "North West, England", "Liverpool City Council": "North West, England", "Manchester City Council": "North West, England", "Oldham Borough Council": "North West, England", "Pendle Borough Council": "North West, England", "Preston City Council": "North West, England", "Ribble Valley Borough Council": "North West, England", "Rochdale Borough Council": "North West, England", "Rossendale Borough Council": "North West, England", "Salford City Council": "North West, England", "Sefton Borough Council": "North West, England", "South Ribble Borough Council": "North West, England", "St Helens Borough Council": "North West, England", "Stockport Borough Council": "North West, England", "Tameside Borough Council": "North West, England", "Trafford Borough Council": "North West, England", "Warrington Borough Council": "North West, England", "West Lancashire District Council": "North West, England", "Westmorland and Furness Council": "North West, England", "Wigan Borough Council": "North West, England", "Wirral Borough Council": "North West, England", "Wyre Borough Council": "North West, England", "Adur District Council": "South East, England", "Arun District Council": "South East, England", "Ashford Borough Council": "South East, England", "Basingstoke & Deane Borough Council": "South East, England", "Bracknell Forest Borough Council": "South East, England", "Brighton and Hove City Council": "South East, England", "Buckinghamshire Council": "South East, England", "Canterbury City Council": "South East, England", "Cherwell District Council": "South East, England", "Chichester District Council": "South East, England", "Crawley Borough Council": "South East, England", "Dartford Borough Council": "South East, England", "Dover District Council": "South East, England", "East Hampshire District Council": "South East, England", "East Sussex County Council": "South East, England", "Eastbourne Borough Council": "South East, England", "Eastleigh Borough Council": "South East, England", "Elmbridge Borough Council": "South East, England", "Epsom & Ewell Borough Council": "South East, England", "Fareham Borough Council": "South East, England", "Folkestone and Hythe District Council": "South East, England", "Gosport Borough Council": "South East, England", "Gravesham Borough Council": "South East, England", "Guildford Borough Council": "South East, England", "Hampshire County Council": "South East, England", "Hart District Council": "South East, England", "Hastings Borough Council": "South East, England", "Havant Borough Council": "South East, England", "Horsham District Council": "South East, England", "Isle of Wight Council": "South East, England", "Kent County Council": "South East, England", "Lewes District Council": "South East, England", "Maidstone Borough Council": "South East, England", "Medway Council": "South East, England", "Mid Sussex District Council": "South East, England", "Milton Keynes Council": "South East, England", "Mole Valley District Council": "South East, England", "New Forest District Council": "South East, England", "Oxford City Council": "South East, England", "Oxfordshire County Council": "South East, England", "Portsmouth City Council": "South East, England", "Reading Borough Council": "South East, England", "Reigate & Banstead Borough Council": "South East, England", "Rother District Council": "South East, England", "Runnymede Borough Council": "South East, England", "Rushmoor Borough Council": "South East, England", "Sevenoaks District Council": "South East, England", "Slough Borough Council": "South East, England", "South Oxfordshire District Council": "South East, England", "Southampton City Council": "South East, England", "Spelthorne Borough Council": "South East, England", "Surrey County Council": "South East, England", "Surrey Heath Borough Council": "South East, England", "Swale Borough Council": "South East, England", "Tandridge District Council": "South East, England", "Test Valley Borough Council": "South East, England", "Thanet District Council": "South East, England", "Tonbridge & Malling Borough Council": "South East, England", "Tunbridge Wells Borough Council": "South East, England", "Vale of White Horse District Council": "South East, England", "Waverley Borough Council": "South East, England", "Wealden District Council": "South East, England", "West Berkshire Council": "South East, England", "West Oxfordshire District Council": "South East, England", "West Sussex County Council": "South East, England", "Winchester City Council": "South East, England", "Windsor and Maidenhead Borough Council": "South East, England", "Woking Borough Council": "South East, England", "Wokingham Borough Council": "South East, England", "Worthing Borough Council": "South East, England", "Bath and North East Somerset Council": "South West, England", "Bournemouth, Christchurch and Poole Council": "South West, England", "Bristol City Council": "South West, England", "Cheltenham Borough Council": "South West, England", "Cornwall Council": "South West, England", "Cotswold District Council": "South West, England", "Council of the Isles of Scilly": "South West, England", "Devon County Council": "South West, England", "Dorset Council": "South West, England", "East Devon District Council": "South West, England", "Exeter City Council": "South West, England", "Forest of Dean District Council": "South West, England", "Gloucester City Council": "South West, England", "Gloucestershire County Council": "South West, England", "Mid Devon District Council": "South West, England", "North Devon District Council": "South West, England", "North Somerset Council": "South West, England", "Plymouth City Council": "South West, England", "Somerset Council": "South West, England", "South Gloucestershire Council": "South West, England", "South Hams District Council": "South West, England", "Stroud District Council": "South West, England", "Swindon Borough Council": "South West, England", "Teignbridge District Council": "South West, England", "Tewkesbury Borough Council": "South West, England", "Torbay Council": "South West, England", "Torridge District Council": "South West, England", "West Devon District Council": "South West, England", "Wiltshire Council": "South West, England", "Birmingham City Council": "West Midlands, England", "Bromsgrove District Council": "West Midlands, England", "Cannock Chase District Council": "West Midlands, England", "Coventry City Council": "West Midlands, England", "Dudley Borough Council": "West Midlands, England", "East Staffordshire Borough Council": "West Midlands, England", "Herefordshire Council": "West Midlands, England", "Lichfield City Council": "West Midlands, England", "Malvern Hills District Council": "West Midlands, England", "Newcastle-Under-Lyme Borough Council": "West Midlands, England", "North Warwickshire Borough Council": "West Midlands, England", "Nuneaton & Bedworth Borough Council": "West Midlands, England", "Redditch Borough Council": "West Midlands, England", "Rugby Borough Council": "West Midlands, England", "Sandwell Borough Council": "West Midlands, England", "Shropshire Council": "West Midlands, England", "Solihull Borough Council": "West Midlands, England", "South Staffordshire District Council": "West Midlands, England", "Stafford Borough Council": "West Midlands, England", "Staffordshire County Council": "West Midlands, England", "Staffordshire Moorlands District Council": "West Midlands, England", "Stoke-on-Trent City Council": "West Midlands, England", "Stratford on Avon District Council": "West Midlands, England", "Tamworth Borough Council": "West Midlands, England", "Telford and Wrekin Borough Council": "West Midlands, England", "Walsall Borough Council": "West Midlands, England", "Warwick District Council": "West Midlands, England", "Warwickshire County Council": "West Midlands, England", "Wolverhampton City Council": "West Midlands, England", "Worcester City Council": "West Midlands, England", "Worcestershire County Council": "West Midlands, England", "Wychavon District Council": "West Midlands, England", "Wyre Forest District Council": "West Midlands, England", "Barnsley Borough Council": "Yorkshire and the Humber, England", "Bradford City Council": "Yorkshire and the Humber, England", "Calderdale Borough Council": "Yorkshire and the Humber, England", "City of Doncaster Council": "Yorkshire and the Humber, England", "City of York Council": "Yorkshire and the Humber, England", "East Riding of Yorkshire Council": "Yorkshire and the Humber, England", "Hull City Council": "Yorkshire and the Humber, England", "Kirklees Borough Council": "Yorkshire and the Humber, England", "Leeds City Council": "Yorkshire and the Humber, England", "North East Lincolnshire Council": "Yorkshire and the Humber, England", "North Lincolnshire Council": "Yorkshire and the Humber, England", "North Yorkshire Council": "Yorkshire and the Humber, England", "Rotherham Borough Council": "Yorkshire and the Humber, England", "Sheffield City Council": "Yorkshire and the Humber, England", "Wakefield City Council": "Yorkshire and the Humber, England", "Aberdeen City Council": "Scotland", "Aberdeenshire Council": "Scotland", "Angus Council": "Scotland", "Argyll and Bute Council": "Scotland", "City of Edinburgh Council": "Scotland", "Clackmannanshire Council": "Scotland", "Comhairle nan Eilean Siar": "Scotland", "Dumfries and Galloway Council": "Scotland", "Dundee City Council": "Scotland", "East Ayrshire Council": "Scotland", "East Dunbartonshire Council": "Scotland", "East Lothian Council": "Scotland", "East Renfrewshire Council": "Scotland", "Falkirk Council": "Scotland", "Fife Council": "Scotland", "Glasgow City Council": "Scotland", "Inverclyde Council": "Scotland", "Midlothian Council": "Scotland", "North Ayrshire Council": "Scotland", "North Lanarkshire Council": "Scotland", "Orkney Islands Council": "Scotland", "Perth and Kinross Council": "Scotland", "Renfrewshire Council": "Scotland", "Scottish Borders Council": "Scotland", "Shetland Islands Council": "Scotland", "South Ayrshire Council": "Scotland", "South Lanarkshire Council": "Scotland", "Stirling Council": "Scotland", "The Highland Council": "Scotland", "The Moray Council": "Scotland", "West Dunbartonshire Council": "Scotland", "West Lothian Council": "Scotland", "Blaenau Gwent County Borough Council": "Wales", "Bridgend County Borough Council": "Wales", "Caerphilly County Borough Council": "Wales", "Cardiff Council": "Wales", "Carmarthenshire County Council": "Wales", "Ceredigion County Council": "Wales", "City and County of Swansea Council": "Wales", "Conwy County Borough Council": "Wales", "Denbighshire County Council": "Wales", "Flintshire County Council": "Wales", "Gwynedd Council": "Wales", "Isle of Anglesey County Council": "Wales", "Merthyr Tydfil County Borough Council": "Wales", "Monmouthshire County Council": "Wales", "Neath Port Talbot County Borough Council": "Wales", "Newport City Council": "Wales", "Pembrokeshire County Council": "Wales", "Powys County Council": "Wales", "Rhondda Cynon Taf County Borough Council": "Wales", "The Vale of Glamorgan County Borough Council": "Wales", "Torfaen County Borough Council": "Wales", "Wrexham County Borough Council": "Wales", "Antrim and Newtownabbey Borough Council": "Northern Ireland", "Ards and North Down Borough Council": "Northern Ireland", "Armagh City, Banbridge and Craigavon Borough Council": "Northern Ireland", "Belfast City Council": "Northern Ireland", "Causeway Coast and Glens Borough Council": "Northern Ireland", "Derry City and Strabane District Council": "Northern Ireland", "Fermanagh and Omagh District Council - Enniskillen Office": "Northern Ireland", "Lisburn and Castlereagh City Council": "Northern Ireland", "Mid and East Antrim Borough Council": "Northern Ireland", "Mid Ulster District Council - Dungannon": "Northern Ireland", "Newry, Mourne and Down District Council": "Northern Ireland"}';
+const councils_and_regions = JSON.parse(councils_and_regions_json);
+</script>
+
+
+</body>
+
+</html>
