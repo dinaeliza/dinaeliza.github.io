@@ -1,0 +1,109 @@
+/* KEEP BRITAIN TIDY */
+
+* {
+    box-sizing: border-box;
+} 
+
+
+body {
+    background-color: #008ca2; /* #3ab7cb   #159bb0 #bf2388   #7626ba #0b6d7c #008cc2  #bff4ff*/
+    color: white;
+    padding-left: 3.4rem;
+    padding-right: 3.4rem;
+    padding-top: 2.3rem;
+    padding-bottom: 2.3rem;
+    font-family: "avenir-next-lt-pro", sans-serif; /*"Verdana", Arial,*/
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+}
+
+a {
+    color: white;
+    padding-left: 1.5rem;
+    padding-right: 0.8rem;
+    font-weight: normal;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+}
+
+nav {
+    padding-top: 1.8rem;
+    padding-bottom: 2rem;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.page-header{
+    background-color: #007285; 
+    color: white;
+    padding-top: 2rem;
+    padding-bottom: 2.2rem;
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    font-size: 1.4rem;
+    line-height: 2.4rem;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background-color: white;
+    color: #1c1c1c;
+    font-size: 1.2rem;
+    line-height: 2.2rem;
+}
+
+.selection {
+    padding: 10px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin: 1px;
+    background-color: #71e5f5;
+    flex: 20%;
+}
+
+.faq {
+    padding: 10px;
+    margin: 1px;
+    background-color: #82e5f5;
+    flex: 55%;
+}
+
+.contact {
+    padding: 10px;
+    margin: 1px;
+    background-color: #94e5f5;
+    flex:20%;
+}
+
+@media screen and (max-width: 1500px) {
+    .selection, .main, .contact{
+	flex: 100%;  
+  }
+    body {
+        padding-left: 2.4rem;
+        padding-right: 2.4rem;
+        padding-top: 1.3rem;
+        padding-bottom: 1.3rem;
+  }
+}
+
+
+.page-footer{
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #3ab7cb;
+    color: white;
+    padding-top: 2.4rem;
+    padding-bottom: 2.4rem;
+    font-size: 1rem;
+    line-height: 1rem;
+    row-gap: 1px;
+    column-gap: 1rem;
+    justify-content: center;
+}
+.page-footer > * {
+  padding: 10px;
+}
